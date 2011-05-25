@@ -6,16 +6,9 @@ from django.http import Http404
 
 
 
-def index(request):
-    cand_list = Candidatura.objects.all().order_by('-data_candidatura')
-    
-    return render_to_response('candidaturas/index.html',
-                                {'cand_list': cand_list})
-
-
 def detail(request, candidatura_id):
     c = get_object_or_404(Candidatura, pk=candidatura_id)
-    return render_to_response('candidaturas/detail.html',
+    return render_to_response('detail.html',
                                     {'candidatura': c})
 
 def add(request):
@@ -26,9 +19,15 @@ def add(request):
             # ...
             form.save()
             # Redirect after POST
-            return HttpResponseRedirect('/candidaturas/thanks.html') 
+            return HttpResponseRedirect('thanks.html') 
     else:
         form = CandidaturaForm() # An unbound form
 
-    return render_to_response('/candidaturas/add.html', {'form': form},
+    return render_to_response('add.html', {'form': form},
                                 context_instance=RequestContext(request))
+
+
+def rm(request, candidatura_id):
+    c = Candidatura.objects.get(pk=candidatura_id)
+    c.delete()
+    return HttpResponseRedirect('/candidaturas/')

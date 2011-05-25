@@ -1,9 +1,0 @@
-{% if cand_list %}
-    <ul>
-    {% for candidatura in cand_list %}
-        <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.nome }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Não existem candidaturas no sistema.</p>
-{% endif %}

@@ -1,9 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
-#from django import forms
-#from django.contrib.admin.widgets import AdminFileWidget
 
-# Create your models here.
 
 class Candidatura(models.Model):
 	nome = models.CharField(max_length=100)
@@ -19,10 +16,15 @@ class Candidatura(models.Model):
 	cv = models.FileField(upload_to='candidaturas/cv/%Y/%m/%d',
 	                        max_length=200)
 	data_candidatura = models.DateTimeField(auto_now=True)
+	aceite =  models.BooleanField()
+	
+	def __unicode__(self):
+	    return self.nome
+	
+	class Meta:
+	    ordering = ['data_candidatura']
 
 
 class CandidaturaForm(ModelForm):
-#    fotocopia_bi = forms.FileField(widget=AdminFileWidget)
-#    cv = forms.FileField(widget=AdminFileWidget)
     class Meta:
         model = Candidatura
