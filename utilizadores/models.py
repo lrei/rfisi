@@ -1,40 +1,23 @@
 from django.db import models
-from django.forms import ModelForm
-from django.contrib.auth.models import User 
+from django import forms
+from django.contrib.auth.models import User, UserManager
 from candidaturas.models import Candidatura
 import string
 
-class Gestor(User):
-    def __init__(self):
-        super(Gestor, self).__init__()
-        is_superuser = True
 
-class Fisioterapeuta(User):
-    candidatura = models.ForeignKey(Candidatura)
-    
-    def __init__(self):
-        super(Fisioterapeuta, self).__init__()
-        self.email = candidatura.email
-        self.username = candidatura.email
-        self.password = "password"
-        self.first_name = candidatura.nome.split(' ')[0]
-        self.last_name = candidatura.nome.split(' ')[-1]
-
-
-class Paciente(User):
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True, related_name='profile')
     morada = models.CharField(max_length=300)
     telefone = models.PositiveIntegerField()
     data_nascimento = models.DateField()
 
-class Medico(User):
-    morada = models.CharField(max_length=300)
-    telefone = models.PositiveIntegerField()
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user = 
+                                                                    u)[0])
 
-
-class MedicoForm(ModelForm):
-    class Meta:
-        model = Medico
-
-class PacienteForm(ModelForm):
-    class Meta:
-        model = Paciente
+class RfUserForm(forms.Form):
+    morada = forms.CharField(max_length=300)
+    telefone = forms.IntegerField(min_value=0)
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    data_nascimento = forms.DateField()

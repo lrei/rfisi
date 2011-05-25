@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 
 # UTILIZADORES
 urlpatterns += patterns('',
-    (r'^utilizadores/add_medico', 'utilizadores.views.add_medico'),
+    (r'^utilizadores/add', 'utilizadores.views.add'),
 )
 
 

@@ -92,3 +92,5 @@ INSTALLED_APPS = (
     'candidaturas',
     'utilizadores',
 )
+
+AUTH_PROFILE_MODULE = 'utilizadores.UserProfile'
