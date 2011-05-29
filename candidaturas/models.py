@@ -3,7 +3,8 @@ from django.forms import ModelForm
 
 
 class Candidatura(models.Model):
-	nome = models.CharField(max_length=100)
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
 	data_nascimento = models.DateField()
 	morada = models.CharField(max_length=300)
 	telefone = models.PositiveIntegerField()
@@ -17,7 +18,7 @@ class Candidatura(models.Model):
 	                        max_length=200)
 	data_candidatura = models.DateTimeField(auto_now=True)
 	aceite =  models.BooleanField()
-	
+		
 	def __unicode__(self):
 	    return self.nome
 	

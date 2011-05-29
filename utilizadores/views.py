@@ -6,14 +6,14 @@ from utilizadores.models import *
 from candidaturas.models import *
 from django.contrib.auth.models import User
 
-char_list='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789-_.!?'
+allowed_chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789-_.!?'
 
 def add(request):
     if request.method == 'POST': # If the form has been submitted...
         form = RfUserForm(request.POST, request.FILES)
         if form.is_valid():
             new_pass = User.objects.make_random_password(length = 10,
-                                                    allowed_chars = char_list)
+                                                    allowed_chars = allowed_cars)
             user = User.objects.create(username = form.cleaned_data['email'],
                                         email = form.cleaned_data['email'],
                                         password = new_pass)
@@ -27,9 +27,9 @@ def add(request):
             user.save()
 
             # Redirect after POST
-            return HttpResponseRedirect('thanks.html') 
+            return HttpResponseRedirect('candidaturas/thanks.html') 
     else:
         form = RfUserForm() # An unbound form
 
-    return render_to_response('add_user.html', {'form': form},
+    return render_to_response('utilizadores/add_user.html', {'form': form},
                                 context_instance=RequestContext(request))

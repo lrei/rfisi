@@ -2,7 +2,7 @@
     <h2>Candidaturas</h2>
     <ul>
         {% for candidatura in object_list %}
-           <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.nome }}</a></li>
+           <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.last_name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

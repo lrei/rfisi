@@ -10,6 +10,9 @@ class UserProfile(models.Model):
     morada = models.CharField(max_length=300)
     telefone = models.PositiveIntegerField()
     data_nascimento = models.DateField()
+    candidatura = models.ForeignKey(Candidatura, related_name='profile',
+                    null=True, unique=True)
+    
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user = 
                                                                     u)[0])

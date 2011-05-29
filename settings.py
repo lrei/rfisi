@@ -9,13 +9,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#admin password is 'password'
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql_psycopg2', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'rfisi',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': 'password',                  # Not used with sqlite3.
-        'HOST': '',                     # Set to empty string for localhost. Not used with sqlite3.
+        'ENGINE': 'mysql', #'postgresql_psycopg2', 'mysql', 'sqlite3'.
+        'NAME': 'rfisi',      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        #'USER': 'postgres',                      # Not used with sqlite3.
+        #'PASSWORD': 'password',                  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -77,9 +80,9 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'rfisi.urls'
 
-#TEMPLATE_DIRS = (
-#'/Users/rei/FEUP/LSDO/rfisi/templates',
-#)
+TEMPLATE_DIRS = (
+'/Users/rei/FEUP/LSDO/rfisi/templates',
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

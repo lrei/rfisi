@@ -15,6 +15,7 @@ candidatura_info = {
 urlpatterns = patterns('',
     (r'^candidaturas/add', 'candidaturas.views.add'),
     (r'^candidaturas/rm/(?P<candidatura_id>\d+)/$', 'candidaturas.views.rm'),
+    (r'^candidaturas/approve/(?P<candidatura_id>\d+)/$', 'candidaturas.views.approve'),
     (r'^candidaturas/(?P<candidatura_id>\d+)/$', 'candidaturas.views.detail'),
     (r'^candidaturas/$', list_detail.object_list, candidatura_info),
 )
