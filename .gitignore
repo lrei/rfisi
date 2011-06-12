@@ -20,3 +20,8 @@ CVS
 # Python
 *.pyc
 
+#django file dir
+*/files/*
+*.pdf
+*jpg
+*jpeg

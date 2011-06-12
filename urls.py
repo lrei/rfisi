@@ -6,10 +6,12 @@ admin.autodiscover()
 
 from django.views.generic import list_detail
 from candidaturas.models import Candidatura
+from django.contrib.auth.models import User, UserManager
 
 candidatura_info = {
     'queryset': Candidatura.objects.filter(aceite=False),
 }
+
 
 # CANDIDATURAS
 urlpatterns = patterns('',
@@ -23,6 +25,9 @@ urlpatterns = patterns('',
 # UTILIZADORES
 urlpatterns += patterns('',
     (r'^utilizadores/add', 'utilizadores.views.add'),
+    (r'^utilizadores/near/(?P<user_id>\d+)/$', 'utilizadores.views.near'),
+    (r'^utilizadores/(?P<user_id>\d+)/$', 'utilizadores.views.detail'),
+    (r'^utilizadores/$', 'utilizadores.views.user_list'),
 )
 
 

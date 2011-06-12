@@ -1,12 +1,17 @@
 from django.db import models
-from django.forms import ModelForm
-
+from django import forms
+from geopy import geocoders
 
 class Candidatura(models.Model):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	data_nascimento = models.DateField()
-	morada = models.CharField(max_length=300)
+	rua = models.CharField(max_length=100)
+	cod_postal = models.PositiveIntegerField()
+	cidade = models.CharField(max_length=50)
+	pais = models.CharField(max_length=50)
+	latitude = models.FloatField()
+	longitude = models.FloatField()
 	telefone = models.PositiveIntegerField()
 	email = models.EmailField()
 	nib = models.CharField(max_length=50)
@@ -26,6 +31,18 @@ class Candidatura(models.Model):
 	    ordering = ['data_candidatura']
 
 
-class CandidaturaForm(ModelForm):
-    class Meta:
-        model = Candidatura
+class CandidaturaForm(forms.Form):
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    data_nascimento = forms.DateField()
+    rua = forms.CharField(max_length=100)
+    cod_postal = forms.IntegerField()
+    cidade = forms.CharField(max_length=50)
+    #pais = forms.CharField(max_length=50)
+    telefone = forms.IntegerField()
+    email = forms.EmailField()
+    nib = forms.CharField(max_length=50)
+    nif = forms.IntegerField()
+    recibos_verdes = forms.BooleanField()
+    fotocopia_bi = forms.FileField()
+    cv = forms.FileField()
