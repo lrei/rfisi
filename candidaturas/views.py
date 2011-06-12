@@ -94,7 +94,7 @@ def approve(request, candidatura_id):
         user_profile.save()
     except Exception as e:
         user.delete()
-        print e
+        #print e
         return render_to_response('candidaturas/detail.html',
                                         {'candidatura': c})
 
