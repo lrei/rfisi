@@ -96,10 +96,12 @@ def near(request, user_id):
         names[user.id] = user.first_name + " " + user.last_name
         
     # sort the dictionary
-    #sd = sorted(dist.items(), key=operator.itemgetter(1))
+    sorted_t = sorted(dist.iteritems(),
+                    key=operator.itemgetter(1))
+    #sd = dict(sorted_t)
     
     fisioterapeutas = []
-    for key, value in dist.items():
+    for (key, value) in sorted_t:
         fisioterapeutas.append(FisiDistance(key, names[key],
                                             str(round(value, 2))))
         
