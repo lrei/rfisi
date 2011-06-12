@@ -26,6 +26,6 @@ class RfUserForm(forms.Form):
     rua = forms.CharField(max_length=100)
     cod_postal = forms.IntegerField()
     cidade = forms.CharField(max_length=50)
-    pais = forms.CharField(max_length=50)
+    #pais = forms.CharField(max_length=50)
     telefone = forms.IntegerField(min_value=0)
     email = forms.EmailField()
