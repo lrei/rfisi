@@ -1,6 +1,10 @@
-This is the profile page for {{candidatura.last_name}}</p>
+{% extends "base.html" %}
+{% block title %}rFisi - Candidatura - {{candidatura.first_name}} {{candidatura.last_name}}{% endblock %}
+{% block content %}
+This is the profile page for {{candidatura.last_name}}<br/>
 Who lives in ({{candidatura.latitude}}, {{candidatura.longitude}})
-</p>
-</p>
+<br/>
+<br/>
 <a href="/candidaturas/rm/{{ candidatura.id }}/">Rejeitar</a>
 <a href="/candidaturas/approve/{{ candidatura.id }}/">Aceitar</a>
+{% endblock %}

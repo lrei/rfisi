@@ -77,11 +77,13 @@ def detail(request, user_id):
                                                                     
 def near(request, user_id):
     u = User.objects.get(pk=user_id)
+    n = u.first_name + " " + u.last_name
     coord1 = (u.get_profile().latitude, u.get_profile().longitude)
     users = User.objects.filter(profile__candidatura__isnull=False)
     g = geocoders.Google()
     
     dist = {}
+    names = {}
     for user in users:
         if user == u:
             continue
@@ -91,11 +93,19 @@ def near(request, user_id):
             continue
         coord2 = (user.get_profile().latitude, user.get_profile().longitude)
         dist[user.id] = distance.distance(coord1, coord2).km
-    
+        names[user.id] = user.first_name + " " + user.last_name
+        
     # sort the dictionary
     #sd = sorted(dist.items(), key=operator.itemgetter(1))
     
+    fisioterapeutas = []
+    for key, value in dist.items():
+        fisioterapeutas.append(FisiDistance(key, names[key],
+                                            str(round(value, 2))))
+        
+    
     return render_to_response('utilizadores/distances.html',
-                                {'distances':dist},
+                                {'fisioterapeutas':fisioterapeutas,
+                                'id':user_id, 'name':n},
                                 context_instance=RequestContext(request))
     

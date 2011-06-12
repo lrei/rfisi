@@ -1,6 +1,18 @@
-User: Distance (km)
-<p/>
-{% for key, value in distances.items %}
-    {{ key }}: {{ value }}
-	<p/>
+{% extends "base.html" %}
+{% block title %}rFisi - Fisioterapeutas próximos{% endblock %}
+{% block content %}
+<h2>Fisioterapeutas próximos</h2>
+Paciente: <a href="/utilizadores/{{ id }}/">{{ name }}</a>
+<table cellspacing="40">
+<tr>
+<th>Fisioterapeuta</th>
+<th>Distancia</th>
+</tr>
+{% for fisioterapeuta in fisioterapeutas %}
+<tr>
+<td align="center"><a href="/utilizadores/{{ fisioterapeuta.uid }}/">{{ fisioterapeuta.name }}</a></td>
+<td align="center">{{ fisioterapeuta.distance }} km</td>
+</tr>
 {% endfor %}
+</table>
+{% endblock %}

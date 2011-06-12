@@ -1,4 +1,8 @@
+{% extends "base.html" %}
+{% block title %}rFisi - Novo paciente{% endblock %}
+{% block content %}
 <form enctype="multipart/form-data" action="/utilizadores/add/" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>
+{% endblock %}

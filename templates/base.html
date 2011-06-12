@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>{% block title %}rFisi{% endblock %}</title>
+<style type="text/css">
+
+	#wrap {
+		float:left;
+		width:750px;
+		margin:0 auto;
+		background:#FFFFFF;
+	}
+
+	#content {
+		float:left;
+		align:center;
+		width:500px;
+		background:#FFFFFF;
+	}
+
+	#sidebar {
+		float:left;
+		width:200px;
+		height:100%;
+		background:#FFFFFF;
+	}
+</style>
+</head>
+
+<body>
+	<div id="wrap">
+    	<div id="sidebar">
+        	{% block sidebar %}
+        	<ul>
+            	<li><a href="/">Home</a></li>
+            	<li><a href="/candidaturas/">Candidaturas</a></li>
+				<li><a href="/utilizadores/">Pacientes</a></li>
+        	</ul>
+        	{% endblock %}
+    	</div>
+
+    	<div id="content">
+        	{% block content %}{% endblock %}
+    	</div>
+	</div>
+</body>
+</html>

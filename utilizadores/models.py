@@ -29,3 +29,9 @@ class RfUserForm(forms.Form):
     #pais = forms.CharField(max_length=50)
     telefone = forms.IntegerField(min_value=0)
     email = forms.EmailField()
+
+class FisiDistance:
+    def __init__(self, uid, name, distance):
+        self.uid = uid
+        self.name = name
+        self.distance = distance

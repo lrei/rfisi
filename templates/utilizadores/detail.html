@@ -1,4 +1,11 @@
+{% extends "base.html" %}
+{% block title %}rFisi - Novo paciente{% endblock %}
+{% block content %}
 This is the profile page for {{user.last_name}}</p>
 Who lives in ({{prof.latitude}}, {{prof.longitude}})
-</p>
-</p>
+<br/>
+{% if not prof.candidatura %}
+<br/>
+<a href="/utilizadores/near/{{ user.id }}/">Fisioterapeutas próximos</a>
+{% endif %}
+{% endblock %}
