@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block title %}rFisi - Candidaturas{% endblock %}
+{% block headertitle %}rFisi - Candidaturas{% endblock %}
+{% block subtitle %}Lista de candidaturas por aprovar{% endblock %}
+{% block contentTitle %}Lista de Candidaturas{% endblock %}
+
 {% block content %}
     <ul>
         {% for candidatura in object_list %}
-           <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.last_name }}</a></li>
+           <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.first_name }} {{ candidatura.last_name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

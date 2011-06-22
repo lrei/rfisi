@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-
+from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -12,9 +12,14 @@ candidatura_info = {
     'queryset': Candidatura.objects.filter(aceite=False),
 }
 
+# INDEX
+urlpatterns = patterns('',
+(r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'index.html'}),
+(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.STATIC_DOC_ROOT, 'show_indexes': True}),)
 
 # CANDIDATURAS
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     (r'^candidaturas/add', 'candidaturas.views.add'),
     (r'^candidaturas/rm/(?P<candidatura_id>\d+)/$', 'candidaturas.views.rm'),
     (r'^candidaturas/approve/(?P<candidatura_id>\d+)/$', 'candidaturas.views.approve'),

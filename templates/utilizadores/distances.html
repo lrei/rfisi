@@ -2,7 +2,7 @@
 {% block title %}rFisi - Fisioterapeutas próximos{% endblock %}
 {% block content %}
 <h2>Fisioterapeutas próximos</h2>
-Paciente: <a href="/utilizadores/{{ id }}/">{{ name }}</a>
+Paciente: <a href="/utilizadores/{{ id }}/">{{ user.first_name }} {{ user.last_name }}</a>
 <table cellspacing="30">
 <tr>
 <th>Fisioterapeuta</th>

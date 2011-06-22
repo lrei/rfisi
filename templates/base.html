@@ -5,44 +5,178 @@
     <title>{% block title %}rFisi{% endblock %}</title>
 <style type="text/css">
 
-	#wrap {
-		float:left;
-		width:750px;
-		margin:0 auto;
-		background:#FFFFFF;
-	}
+html, body {
+text-align: center;
+}
+p {text-align: left;}
 
-	#content {
-		float:left;
-		align:center;
-		width:500px;
-		background:#FFFFFF;
-	}
+body {
+	margin: 0;
+	padding: 0;
+	background: #697281;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #F1F5F8;
+	background-color:#697281;
+}
+*
+{
+  margin: 0 auto 0 auto;
+ text-align:left;}
 
-	#sidebar {
-		float:left;
-		width:200px;
-		height:100%;
-		background:#FFFFFF;
-	}
+#page
+{
+  margin: 0 auto 0 auto; 
+  display: block; 
+  height:auto;
+  position: relative; 
+  overflow: hidden; 
+  background: #697281 url(/static/background.png) repeat-y;
+  width: 750px;
+}
+
+#header
+{
+background-image:url(/static/header.png);
+background-repeat:no-repeat;
+height:156px;
+width:750px;
+}
+
+#headerTitle
+{
+position:relative;
+left:30px;
+top:75px;
+color:#FFFFFF;
+text-align:left;
+font-size:30px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+#headerSubText
+{
+position:relative;
+left:30px;
+top:72px;
+color:#DEE6F8;
+text-align:left;
+font-size:16px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+#bar
+{
+background-image:url(/static/bar.png);
+background-repeat:no-repeat;
+height:53px;
+width:750px;
+padding-bottom:15px;
+
+}
+
+
+
+#bar .navLink a
+{
+position:relative;
+top:16px;
+margin-left:35px;
+color:#FFFFFF;
+text-align:center;
+font-size:15px;
+float:left;
+
+}
+
+#bar .navLink a:hover
+{
+color:#E4EBFA;
+}
+
+
+.contentTitle
+{
+width:700px;
+height:44px;
+margin-top:20px;
+margin-left:25px;
+margin-right:25px;
+background-image:url(/static/tab_back.png);
+background-repeat:no-repeat;
+
+}
+
+.contentTitle h1
+{
+margin-left:21px;
+padding-top:8px;
+font-size:17px;
+font-weight:bold;
+color:#071027;
+}
+
+
+.contentText
+{
+width:680px;
+padding-left:30px;
+padding-right:30px;
+font-size:13px;
+color:#030712;
+line-height:30px;
+}
+
+a
+{
+text-decoration:none;
+color:#223F8D;
+}
+
+a:hover
+{
+color:#5478D6;
+}
+
+
+#footer {
+width: 750px;
+height:49px;
+background: url(/static/footer.png) no-repeat;
+text-align:center;
+font-size:9px;
+color:#223F8D;
+padding-top:36px;
+}
+
+html, body {
+text-align: center;
+}
+p {text-align: left;}
 </style>
 </head>
 
 <body>
-	<div id="wrap">
+	<div id="page">
+		<div id="header">
+        	<div id="headerTitle">{% block headertitle %}{% endblock %}</div>
+            <div id="headerSubText">{% block subtitle %}{% endblock %}</div>
+		</div>
+		{% block sidebar %}
     	<div id="sidebar">
-        	{% block sidebar %}
-        	<ul>
-            	<li><a href="/">Home</a></li>
-            	<li><a href="/candidaturas/">Candidaturas</a></li>
-				<li><a href="/utilizadores/">Pacientes</a></li>
-        	</ul>
-        	{% endblock %}
-    	</div>
-
-    	<div id="content">
-        	{% block content %}{% endblock %}
-    	</div>
-	</div>
+			<div id="bar">
+		    	<div class="navLink"><a href="/">inicio</a></div>
+		        <div class="navLink"><a href="/candidaturas/">candidaturas</a></div>
+				<div class="navLink"><a href="/utilizadores/">pacientes</a></div>
+			</div>
+		</div>
+        {% endblock %}
+		<div class="contentTitle"><h1>{% block contentTitle %}{% endblock %}</h1></div>
+        <div class="contentText">{% block content %}{% endblock %}</div>
+    </div>
+ <div id="footer">rFisi by <a href="http://www.luisrei.com">luis rei</a> </div>
 </body>
 </html>

@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}rFisi - Nova Candidatura{% endblock %}
+{% block headertitle %}rFisi - Nova Candidatura{% endblock %}
+{% block subtitle %}Processo de candidatura{% endblock %}
+{% block contentTitle %}Formulario de Candidatura{% endblock %}
 {% block content %}
 <form enctype="multipart/form-data" action="/candidaturas/add/" method="post">{% csrf_token %}
 {{ form.as_p }}

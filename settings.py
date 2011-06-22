@@ -84,6 +84,9 @@ TEMPLATE_DIRS = (
 '/Users/rei/FEUP/LSDO/rfisi/templates',
 )
 
+
+STATIC_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/static'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
