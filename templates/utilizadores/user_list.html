@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block title %}rFisi - Pacientes{% endblock %}
+{% block headertitle %}rFisi - Pacientes{% endblock %}
+{% block subtitle %}Lista de Pacientes{% endblock %}
+{% block contentTitle %}Lista de Pacientes{% endblock %}
 {% block content %}
-    <h2>Pacientes</h2>
-    <ul>
         {% for user in users %}
-           <li><a href="/utilizadores/{{ user.id }}/">{{ user.last_name }}</a></li>
+		<li><a href="/utilizadores/{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></li>
         {% endfor %}
-    </ul>
 {% endblock %}

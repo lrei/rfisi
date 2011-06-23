@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-{% block title %}rFisi - Fisioterapeutas próximos{% endblock %}
+{% block title %}rFisi - Fisioterapeutas próximos de {{user.first_name}} {{user.last_name}}{% endblock %}
+{% block headertitle %}rFisi - Fisioterapeutas próximos{% endblock %}
+{% block subtitle %}Fisioterapeutas próximos de {{user.first_name}} {{user.last_name}}{% endblock %}
+{% block contentTitle %}Fisioterapeutas próximos{% endblock %}
 {% block content %}
-<h2>Fisioterapeutas próximos</h2>
 Paciente: <a href="/utilizadores/{{ id }}/">{{ user.first_name }} {{ user.last_name }}</a>
 <table cellspacing="30">
 <tr>

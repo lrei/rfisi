@@ -1,11 +1,15 @@
 {% extends "base.html" %}
-{% block title %}rFisi - Novo paciente{% endblock %}
+{% block title %}rFisi - Utilizador {{user.first_name}} {{user.last_name}}{% endblock %}
+{% block headertitle %}rFisi - Utilizador{% endblock %}
+{% block subtitle %}{{user.first_name}} {{user.last_name}}{% endblock %}
+{% block contentTitle %}{{user.first_name}} {{user.last_name}}{% endblock %}
 {% block content %}
-This is the profile page for {{user.last_name}}</p>
-Who lives in ({{prof.latitude}}, {{prof.longitude}})
+<b>Data de Nascimento: </b> {{prof.data_nascimento}}<br/>
+<b>Morada: </b>{{prof.rua}} {{prof.cod_postal}} {{prof.cidade}}<br/>
+<b>Telefone: </b> {{prof.telefone}}<br/>
 <br/>
-{% if not prof.candidatura %}
+{% if not prof.user %}
 <br/>
-<a href="/utilizadores/near/{{ user.id }}/">Fisioterapeutas próximos</a>
+<a href="/utilizadores/near/{{ user.id }}/">Ver fisioterapeutas próximos</a>
 {% endif %}
 {% endblock %}
