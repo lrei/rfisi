@@ -50,6 +50,8 @@ def add(request):
                 user_profile.latitude = lat
                 user_profile.longitude = lng
                 user_profile.save()
+                # Redirect after POST
+                return HttpResponseRedirect('/utilizadores/')
             except:
                 user.delete()
                 return render_to_response('utilizadores/add_user.html',
@@ -57,8 +59,7 @@ def add(request):
                                     context_instance=RequestContext(request))
             
 
-            # Redirect after POST
-            return HttpResponseRedirect('utilizadores/thanks.html') 
+            
     else:
         form = RfUserForm() # An unbound form
 

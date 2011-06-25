@@ -21,7 +21,5 @@ CVS
 *.pyc
 
 #django file dir
-*/files/*
+files/
 *.pdf
-*jpg
-*jpeg

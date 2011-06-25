@@ -8,7 +8,7 @@
 <b>Morada: </b>{{prof.rua}} {{prof.cod_postal}} {{prof.cidade}}<br/>
 <b>Telefone: </b> {{prof.telefone}}<br/>
 <br/>
-{% if not prof.user %}
+{% if not prof.candidatura %}
 <br/>
 <a href="/utilizadores/near/{{ user.id }}/">Ver fisioterapeutas próximos</a>
 {% endif %}

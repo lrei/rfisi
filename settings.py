@@ -84,8 +84,13 @@ TEMPLATE_DIRS = (
 '/Users/rei/FEUP/LSDO/rfisi/templates',
 )
 
+DATE_FORMAT = ('%d/%m/%Y',)
+
 
 STATIC_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/static'
+FICHAS_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/tratamentos/fichas'
+CV_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/candidaturas/cv'
+BI_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/candidaturas/bi'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -97,6 +102,7 @@ INSTALLED_APPS = (
     ###################
     'candidaturas',
     'utilizadores',
+    'tratamentos',
 )
 
 AUTH_PROFILE_MODULE = 'utilizadores.UserProfile'

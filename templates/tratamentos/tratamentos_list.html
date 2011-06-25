@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}rFisi - Tratamentos{% endblock %}
+{% block headertitle %}rFisi - Tratamentos{% endblock %}
+{% block subtitle %}Lista de Tratamentos{% endblock %}
+{% block contentTitle %}Lista de Tratamentos{% endblock %}
+{% block content %}
+        {% for tratamento in tratamentos %}
+		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }}</a></li>
+        {% endfor %}
+{% endblock %}

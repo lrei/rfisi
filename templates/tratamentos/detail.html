@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}rFisi - Tratamento{% endblock %}
+{% block headertitle %}rFisi - Tratamento{% endblock %}
+{% block subtitle %}Tratamento{% endblock %}
+{% block contentTitle %}Tratamento de {{tratamento.paciente.first_name}} {{tratamento.paciente.last_name}}{% endblock %}
+{% block content %}
+<b>Paciente: </b><a href="/utilizadores/{{tratamento.paciente.id}}/">{{tratamento.paciente.first_name}} {{tratamento.paciente.last_name}}</a><br/>
+<b>Fisioterapeuta: </b><a href="/utilizadores/{{tratamento.fisioterapeuta.id}}/">{{tratamento.fisioterapeuta.first_name}} {{tratamento.fisioterapeuta.last_name}}</a><br/>
+<b>Data de ínicio: </b> {{tratamento.data_inicio}}<br/>
+<b>Data de fim: </b> {{tratamento.data_fim}}<br/>
+<br/>
+<form enctype="multipart/form-data" action="/tratamentos/{{tratamento.id}}/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+{% for ficha in fichas %}
+<li><a href="/{{ ficha.ficha }}">Ficha</a></li>
+{% endfor %}
+{% endblock %}

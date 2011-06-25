@@ -16,7 +16,7 @@ candidatura_info = {
 urlpatterns = patterns('',
 (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'index.html'}),
 (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.STATIC_DOC_ROOT, 'show_indexes': True}),)
+        {'document_root': settings.STATIC_DOC_ROOT, 'show_indexes': False}),)
 
 # CANDIDATURAS
 urlpatterns += patterns('',
@@ -33,6 +33,17 @@ urlpatterns += patterns('',
     (r'^utilizadores/near/(?P<user_id>\d+)/$', 'utilizadores.views.near'),
     (r'^utilizadores/(?P<user_id>\d+)/$', 'utilizadores.views.detail'),
     (r'^utilizadores/$', 'utilizadores.views.user_list'),
+)
+
+# TRATAMENTOS
+urlpatterns += patterns('',
+    (r'^tratamentos/start/(?P<paciente_id>\d+)/(?P<fisioterapeuta_id>\d+)/$', 'tratamentos.views.start'),
+    (r'^tratamentos/end/(?P<tratamento_id>\d+)/$', 'tratamentos.views.end'),
+    (r'^tratamentos/add/(?P<tratamento_id>\d+)/$', 'tratamentos.views.add'),
+    (r'^tratamentos/(?P<tratamento_id>\d+)/$', 'tratamentos.views.detail'),
+    (r'^tratamentos/$', 'tratamentos.views.tratamentos_list'),
+    (r'^tratamentos/fichas/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.FICHAS_DOC_ROOT, 'show_indexes': False}),
 )
 
 

@@ -9,11 +9,13 @@ Paciente: <a href="/utilizadores/{{ id }}/">{{ user.first_name }} {{ user.last_n
 <tr>
 <th>Fisioterapeuta</th>
 <th>Distancia</th>
+<th>Iniciar tratamento</th>
 </tr>
 {% for fisioterapeuta in fisioterapeutas %}
 <tr>
 <td align="center"><a href="/utilizadores/{{ fisioterapeuta.uid }}/">{{ fisioterapeuta.name }}</a></td>
 <td align="center">{{ fisioterapeuta.distance }} km</td>
+<td align="center"><a href="/tratamentos/start/{{ user.id }}/{{ fisioterapeuta.uid }}">Iniciar tratamento</a> </td>
 </tr>
 {% endfor %}
 </table>
