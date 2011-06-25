@@ -25,6 +25,8 @@ urlpatterns += patterns('',
     (r'^candidaturas/approve/(?P<candidatura_id>\d+)/$', 'candidaturas.views.approve'),
     (r'^candidaturas/(?P<candidatura_id>\d+)/$', 'candidaturas.views.detail'),
     (r'^candidaturas/$', list_detail.object_list, candidatura_info),
+    (r'^candidaturas/cv/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.CV_DOC_ROOT, 'show_indexes': False}),
 )
 
 # UTILIZADORES
