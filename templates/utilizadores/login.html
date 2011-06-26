@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}rFisi - Autenticação{% endblock %}
+{% block headertitle %}rFisi - Autenticação{% endblock %}
+{% block subtitle %}O recurso a que tentou aceder necessita de autenticação{% endblock %}
+{% block contentTitle %}Formulário de Autenticação{% endblock %}
+{% block content %}
+O recurso a que tentou aceder está apenas disponível a utilizadores identificados.
+
+{% if form.errors %}
+<p>Utilizador e/ou password incorrectos.</p>
+{% endif %}
+
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>Email</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+<br/>
+Ajuda: O seu username é o endereço de email que forceneu quando se registou no sistema. A sua password foi enviada para o seu email.
+
+{% endblock %}

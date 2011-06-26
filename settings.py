@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Luis Rei', 'luis.rei@gmail.com'),
+     ('Luis Rei', 'rifisi@mailinator.com'),
 )
 
 MANAGERS = ADMINS
@@ -106,3 +106,10 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = 'utilizadores.UserProfile'
+
+LOGIN_URL = '/utilizadores/login/'
+LOGOUT_URL = '/utilizadores/logout/'
+LOGIN_REDIRECT_URL = '/'
+
+MY_SITE_URL = 'rfisi.com'
+EMAIL_SUBJECT_PREFIX = '[rfisi] '

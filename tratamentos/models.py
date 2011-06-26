@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Tratamento(models.Model):
     paciente = models.ForeignKey(User, related_name='paciente')
     fisioterapeuta = models.ForeignKey(User, related_name='fisioterapeuta')
-    data_inicio = models.DateField(auto_now=True)
+    data_inicio = models.DateField(auto_now_add=True)
     data_fim = models.DateField(blank=True, null=True)
 		
 #	def __unicode__(self):

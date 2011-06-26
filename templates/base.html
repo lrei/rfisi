@@ -21,6 +21,11 @@
 		        <div class="navLink"><a href="/candidaturas/">candidaturas</a></div>
 				<div class="navLink"><a href="/utilizadores/">pacientes</a></div>
 				<div class="navLink"><a href="/tratamentos/">tratamentos</a></div>
+				{% if user.is_authenticated %}
+				<div class="navLink"><a href="/utilizadores/logout/">terminar </a></div>
+				{% else %}
+				<div class="navLink"><a href="/utilizadores/login/">iniciar </a></div>
+				{% endif %}
 			</div>
 		</div>
         {% endblock %}

@@ -7,13 +7,21 @@ from utilizadores.models import UserProfile
 from utilizadores.views import allowed_chars
 from django.contrib.auth.models import User
 from geopy import geocoders
-#from exceptions import *
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail, mail_admins
+from django.conf import settings
+from django.utils.encoding import *
 
-
+@login_required
 def detail(request, candidatura_id):
+    if request.user.is_superuser is False:
+         return render_to_response('utilizadores/permerror.html', 
+                                    context_instance=RequestContext(request))
+         
     c = get_object_or_404(Candidatura, pk=candidatura_id)
     return render_to_response('candidaturas/detail.html',
-                                    {'candidatura': c})
+                                    {'candidatura': c},
+                                    context_instance=RequestContext(request))
 
 def add(request):
     if request.method == 'POST': # If the form has been submitted...
@@ -37,11 +45,11 @@ def add(request):
             c.cv = form.cleaned_data['cv']
             c.aceite =  False
             g = geocoders.Google()
+            address = smart_str(c.rua + " " + str(c.cod_postal) + " " + \
+                                    c.cidade + ", " + c.pais,
+                                    encoding='utf-8')
             try:
-                place, (lat, lng) = g.geocode(c.rua + " " + \
-                                                str(c.cod_postal) + \
-                                                " " + c.cidade + ", " + \
-                                                 c.pais)
+                place, (lat, lng) = g.geocode(address)
             except:
                 return render_to_response('candidaturas/locerror.html',
                                     {'candidatura': c},
@@ -49,9 +57,14 @@ def add(request):
             c.latitude = lat
             c.longitude = lng
             c.save()
+            # Send Email Notification to Admins
+            notification = "Candidatura submetida: " + "http://www." + \
+                            settings.MY_SITE_URL + "/candidaturas/" + \
+                            str(c.id) + "/"
+            mail_admins(settings.MY_SITE_URL + ': Candidatura submetida',
+                            notification, fail_silently=False)
             # Redirect after POST
             return render_to_response('candidaturas/thanks.html',
-                                {'candidatura': c},
                                 context_instance=RequestContext(request))
     
     else:
@@ -60,14 +73,20 @@ def add(request):
     return render_to_response('candidaturas/add.html', {'form': form},
                                 context_instance=RequestContext(request))
 
-
+@login_required
 def rm(request, candidatura_id):
+    if request.user.is_superuser is False:
+         return render_to_response('utilizadores/permerror.html')
+         
     c = Candidatura.objects.get(pk=candidatura_id)
     c.delete()
     return HttpResponseRedirect('/candidaturas/')
 
-
+@login_required
 def approve(request, candidatura_id):
+    if request.user.is_superuser is False:
+         return render_to_response('utilizadores/permerror.html')
+         
     c = Candidatura.objects.get(pk=candidatura_id)
     new_pass = User.objects.make_random_password(length = 10,
                     allowed_chars = allowed_chars)
@@ -92,13 +111,34 @@ def approve(request, candidatura_id):
         user_profile.latitude = c.latitude
         user_profile.longitude = c.longitude
         user_profile.save()
+        # Send Email Notification
+        notification = "Bemvindo ao rFisi.\n\
+        Para se autenticar no sistema, utilize o seu email email e a \
+        password: " + new_pass +"\n" 
+         
+        send_mail(settings.MY_SITE_URL + ': Candidatura aceite',
+                        notification,
+                       'do-not-reply@' + settings.MY_SITE_URL,
+                       [user.email], fail_silently=False)
+
+        print new_pass
     except Exception as e:
         user.delete()
-        #print e
+        print e
         return render_to_response('candidaturas/detail.html',
-                                        {'candidatura': c})
+                                {'candidatura': c},
+                                context_instance=RequestContext(request))
 
     c.aceite = True
     c.save()
     
     return HttpResponseRedirect('/candidaturas/')
+
+@login_required
+def candidatura_list(request):
+    if request.user.is_superuser is False:
+         return render_to_response('utilizadores/permerror.html')
+    candidaturas = Candidatura.objects.filter(aceite=False)
+    return render_to_response('candidaturas/candidatura_list.html',
+                                {'candidaturas': candidaturas},
+                                context_instance=RequestContext(request))

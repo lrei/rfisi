@@ -6,7 +6,7 @@
 
 {% block content %}
     <ul>
-        {% for candidatura in object_list %}
+        {% for candidatura in candidaturas %}
            <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.first_name }} {{ candidatura.last_name }}</a></li>
         {% endfor %}
     </ul>

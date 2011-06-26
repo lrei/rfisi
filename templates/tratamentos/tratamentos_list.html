@@ -5,6 +5,6 @@
 {% block contentTitle %}Lista de Tratamentos{% endblock %}
 {% block content %}
         {% for tratamento in tratamentos %}
-		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }}</a></li>
+		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }} - {{ tratamento.paciente.first_name }} {{ tratamento.paciente.last_name }} - {{ tratamento.data_fim }}</a></li>
         {% endfor %}
 {% endblock %}

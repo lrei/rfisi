@@ -6,16 +6,32 @@ from django.http import Http404
 from utilizadores.models import UserProfile
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail, mail_admins
+from django.conf import settings
 
+@login_required
 def tratamentos_list(request):
-    tratamentos = Tratamento.objects.all()
-    #tratamentos = Tratamento.objects.filter(tratamento__data_fim__isnull=True)
-    return render_to_response('tratamentos/tratamentos_list.html',
+    if request.user.is_superuser is True:
+        tratamentos = Tratamento.objects.all()
+        return render_to_response('tratamentos/tratamentos_list.html',
+                                {'tratamentos': tratamentos},
+                                context_instance=RequestContext(request))
+    else:
+        tratamentos = Tratamento.objects.filter(fisioterapeuta=request.user)
+        return render_to_response('tratamentos/tratamentos_list.html',
                                 {'tratamentos': tratamentos},
                                 context_instance=RequestContext(request))
 
+@login_required
 def detail(request, tratamento_id):
-    t = get_object_or_404(Tratamento, pk=tratamento_id)
+    t = Tratamento.objects.get(pk=tratamento_id)
+    fisio = t.fisioterapeuta
+    
+    if request.user.is_superuser is False and fisio.id != request.user.id:
+            return render_to_response('utilizadores/permerror.html')
+    
+    
     fichas = FichaTratamento.objects.filter(tratamento=t)
     if request.method == 'POST': # If the form has been submitted...
         form = FichaForm(request.POST, request.FILES)
@@ -25,6 +41,11 @@ def detail(request, tratamento_id):
             ficha.ficha = form.cleaned_data['ficha']
             ficha.save()
             new_form = FichaForm()
+            # Send Email Notification to Admins
+            notification = "Ficha submetida: " + "http://www." + \
+                            settings.MY_SITE_URL + "/tratamentos/"+t.id+"/"
+            mail_admins(settings.MY_SITE_URL + ': Ficha submetida',
+                                notification, fail_silently=False)
             return render_to_response('tratamentos/detail.html',
                                            {'tratamento': t,
                                            'form': new_form,
@@ -37,18 +58,40 @@ def detail(request, tratamento_id):
                                                             'form': form,
                                                             'fichas': fichas},
                                     context_instance=RequestContext(request))
-
+@login_required
 def start(request, paciente_id, fisioterapeuta_id):
+    
+    if request.user.is_superuser is False:
+               return render_to_response('utilizadores/permerror.html')
+               
     p = User.objects.get(pk=paciente_id)
     f = User.objects.get(pk=fisioterapeuta_id)
     
-    tratamento = Tratamento(paciente=p, fisioterapeuta=f)
-    tratamento.save()                
+    t = Tratamento(paciente=p, fisioterapeuta=f)
+    t.save()
+    
+    # Send Email Notification
+    notification = "Inicio de tratamento:\n" + "http://www." + \
+                    settings.MY_SITE_URL + "/tratamentos/" + str(t.id) + "/"
+     
+    send_mail(settings.MY_SITE_URL + ': Inicio de tratamento',
+                    notification,
+                   'do-not-reply@' + settings.MY_SITE_URL,
+                   [f.email], fail_silently=False)
  
     return HttpResponseRedirect('/tratamentos/')
-
+    
+@login_required
 def end(request, tratamento_id):
     t = Tratamento.objects.get(pk=tratamento_id)
+    
+    #fisio = t.fisioterapeuta
+    
+    if request.user.is_superuser is False:
+            return render_to_response('utilizadores/permerror.html')
+    
+    if t.data_fim:
+        return HttpResponseRedirect('/tratamentos/')
     
     try:
        t.data_fim = datetime.now()
@@ -56,25 +99,7 @@ def end(request, tratamento_id):
     except:
         return render_to_response('tratamentos/error.html')
 
-    return render_to_response('tratamentos/detail.html',
-                                        {'tratamento': t})
+    return HttpResponseRedirect('/tratamentos/')
 
-def add(request, tratamento_id):
-    t = Tratamento.objects.get(pk=tratamento_id)
-    if request.method == 'POST': # If the form has been submitted...
-        form = FichaForm(request.POST, request.FILES)
-        if form.is_valid():
-            ficha = FichaTratamento()
-            f.tratamento = t
-            f.ficha = form.cleaned_data['ficha']
-            f.save()
-            return render_to_response('/tratamentos/detail.html',
-                                           {'tratamento': t})
-               
-    else:
-        form = FichaForm() # An unbound form
-        return render_to_response('tratamentos/add_ficha.html',
-                                    {'form': form},
-                                    context_instance=RequestContext(request))
 
     
