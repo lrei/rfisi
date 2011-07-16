@@ -4,7 +4,7 @@
 {% block subtitle %}Processo de candidatura{% endblock %}
 {% block contentTitle %}Formulario de Candidatura{% endblock %}
 {% block content %}
-<form enctype="multipart/form-data" action="/candidaturas/add/" method="post">{% csrf_token %}
+<form enctype="multipart/form-data" action="{% url candidaturas_add %}" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>

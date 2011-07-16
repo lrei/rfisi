@@ -18,7 +18,8 @@ urlpatterns = patterns('',
 
 # CANDIDATURAS
 urlpatterns += patterns('',
-    url(r'^candidaturas/add', 'candidaturas.views.add'),
+    url(r'^candidaturas/add', 'candidaturas.views.add',
+                            name = 'candidaturas_add'),
     url(r'^candidaturas/rm/(?P<candidatura_id>\d+)/$',
                             'candidaturas.views.rm'),
     url(r'^candidaturas/approve/(?P<candidatura_id>\d+)/$',
@@ -35,7 +36,8 @@ urlpatterns += patterns('',
 
 # UTILIZADORES
 urlpatterns += patterns('',
-    url(r'^utilizadores/add', 'utilizadores.views.add'),
+    url(r'^utilizadores/add', 'utilizadores.views.add',
+                            name = 'utilizadores_add'),
     url(r'^utilizadores/near/(?P<user_id>\d+)/$', 'utilizadores.views.near'),
     url(r'^utilizadores/(?P<user_id>\d+)/$', 'utilizadores.views.detail'),
     url(r'^utilizadores/$', 'utilizadores.views.user_list',

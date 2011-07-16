@@ -2,12 +2,12 @@
 {% block title %}rFisi - Candidaturas{% endblock %}
 {% block headertitle %}rFisi - Candidaturas{% endblock %}
 {% block subtitle %}Lista de candidaturas por aprovar{% endblock %}
-{% block contentTitle %}Lista de Candidaturas    <a href="/candidaturas/add/">+[Adicionar Candidatura]</a>{% endblock %}
+{% block contentTitle %}Lista de Candidaturas    <a href="{% url candidaturas_add %}">+[Adicionar Candidatura]</a>{% endblock %}
 
 {% block content %}
     <ul>
         {% for candidatura in candidaturas %}
-           <li><a href="/candidaturas/{{ candidatura.id }}/">{{ candidatura.first_name }} {{ candidatura.last_name }}</a></li>
+           <li><a href="{{ candidatura.id }}/">{{ candidatura.first_name }} {{ candidatura.last_name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

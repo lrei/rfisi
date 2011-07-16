@@ -2,9 +2,9 @@
 {% block title %}rFisi - Pacientes{% endblock %}
 {% block headertitle %}rFisi - Pacientes{% endblock %}
 {% block subtitle %}Lista de Pacientes{% endblock %}
-{% block contentTitle %}Lista de Pacientes     <a href="/utilizadores/add/">+[Adicionar Paciente]</a>{% endblock %}
+{% block contentTitle %}Lista de Pacientes     <a href="{% url utilizadores_add %}">+[Adicionar Paciente]</a>{% endblock %}
 {% block content %}
         {% for user in users %}
-		<li><a href="/utilizadores/{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></li>
+		<li><a href="{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></li>
         {% endfor %}
 {% endblock %}

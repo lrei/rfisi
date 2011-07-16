@@ -4,7 +4,7 @@
 {% block subtitle %}Adicionar paciente{% endblock %}
 {% block contentTitle %}Formulário de adição de Paciente{% endblock %}
 {% block content %}
-<form enctype="multipart/form-data" action="/utilizadores/add/" method="post">{% csrf_token %}
+<form enctype="multipart/form-data" action="{% url utilizadores_add %}" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>

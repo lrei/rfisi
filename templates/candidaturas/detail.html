@@ -10,10 +10,10 @@
 <b>NIB: </b> {{candidatura.nib}}<br/>
 <b>NIF: </b> {{candidatura.nif}}<br/>
 <b>Recibos Verdes: </b> {{candidatura.recibos_verdes}}<br/>
-<b>BI: </b><a href="/{{candidatura.fotocopia_bi}}">Download/Ver</a><br/>
-<b>CV: </b><a href="/{{candidatura.cv}}">Download/Ver</a><br/>
+<b>BI: </b><a href="{{ MEDIA_URL }}/{{candidatura.fotocopia_bi}}">Download/Ver</a><br/>
+<b>CV: </b><a href="{{ MEDIA_URL }}/{{candidatura.cv}}">Download/Ver</a><br/>
 <br/>
 <br/>
-<a href="/candidaturas/rm/{{ candidatura.id }}/">Rejeitar</a>
-<a href="/candidaturas/approve/{{ candidatura.id }}/">Aceitar</a>
+<a href="../rm/{{ candidatura.id }}/">Rejeitar</a>
+<a href="../approve/{{ candidatura.id }}/">Aceitar</a>
 {% endblock %}

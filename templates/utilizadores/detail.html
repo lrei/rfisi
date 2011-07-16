@@ -11,11 +11,11 @@
 <br/>
 {% if not prof.candidatura %}
 <br/>
-<a href="/utilizadores/near/{{ user.id }}/">Ver fisioterapeutas próximos</a>
+<a href="../near/{{ user.id }}/">Ver fisioterapeutas próximos</a>
 {% else %}
 <b>NIB: </b> {{prof.candidatura.nib}}<br/>
 <b>NIF: </b> {{prof.candidatura.nif}}<br/>
-<b>BI: </b><a href="/{{prof.candidatura.fotocopia_bi}}">Download/Ver</a><br/>
-<b>CV: </b><a href="/{{prof.candidatura.cv}}">Download/Ver</a><br/>
+<b>BI: </b><a href="{{ MEDIA_URL }}/{{prof.candidatura.fotocopia_bi}}">Download/Ver</a><br/>
+<b>CV: </b><a href="{{ MEDIA_URL }}/{{prof.candidatura.cv}}">Download/Ver</a><br/>
 {% endif %}
 {% endblock %}

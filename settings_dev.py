@@ -46,3 +46,7 @@ BI_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/candidaturas/bi'
 
 SITE_URL = 'wardrop.fe.up.pt/martinhelder'
 MY_SITE_URL = 'rfisi.com'
+
+LOGIN_URL = '/utilizadores/login/'
+LOGOUT_URL = '/utilizadores/logout/'
+LOGIN_REDIRECT_URL = '/'

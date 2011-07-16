@@ -62,10 +62,6 @@ INSTALLED_APPS = (
 
 AUTH_PROFILE_MODULE = 'utilizadores.UserProfile'
 
-LOGIN_URL = '/utilizadores/login/'
-LOGOUT_URL = '/utilizadores/logout/'
-LOGIN_REDIRECT_URL = '/'
-
 
 EMAIL_SUBJECT_PREFIX = '[rfisi] '
 

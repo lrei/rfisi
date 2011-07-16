@@ -4,7 +4,7 @@
 {% block subtitle %}Fisioterapeutas próximos de {{user.first_name}} {{user.last_name}}{% endblock %}
 {% block contentTitle %}Fisioterapeutas próximos{% endblock %}
 {% block content %}
-Paciente: <a href="/utilizadores/{{ id }}/">{{ user.first_name }} {{ user.last_name }}</a>
+Paciente: <a href="../../{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a>
 <table cellspacing="30">
 <tr>
 <th>Fisioterapeuta</th>
@@ -13,9 +13,9 @@ Paciente: <a href="/utilizadores/{{ id }}/">{{ user.first_name }} {{ user.last_n
 </tr>
 {% for fisioterapeuta in fisioterapeutas %}
 <tr>
-<td align="center"><a href="/utilizadores/{{ fisioterapeuta.uid }}/">{{ fisioterapeuta.name }}</a></td>
+<td align="center"><a href="../../{{ fisioterapeuta.uid }}/">{{ fisioterapeuta.name }}</a></td>
 <td align="center">{{ fisioterapeuta.distance }} km</td>
-<td align="center"><a href="/tratamentos/start/{{ user.id }}/{{ fisioterapeuta.uid }}">Iniciar tratamento</a> </td>
+<td align="center"><a href="../../../tratamentos/start/{{ user.id }}/{{ fisioterapeuta.uid }}">Iniciar tratamento</a> </td>
 </tr>
 {% endfor %}
 </table>

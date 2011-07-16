@@ -5,22 +5,22 @@
 {% block subtitle %}Tratamento{% endblock %}
 {% block contentTitle %}Tratamento de {{tratamento.paciente.first_name}} {{tratamento.paciente.last_name}}{% endblock %}
 {% block content %}
-<b>Paciente: </b><a href="/utilizadores/{{tratamento.paciente.id}}/">{{tratamento.paciente.first_name}} {{tratamento.paciente.last_name}}</a><br/>
-<b>Fisioterapeuta: </b><a href="/utilizadores/{{tratamento.fisioterapeuta.id}}/">{{tratamento.fisioterapeuta.first_name}} {{tratamento.fisioterapeuta.last_name}}</a><br/>
+<b>Paciente: </b><a href="{% url utilizadores %}{{tratamento.paciente.id}}/">{{tratamento.paciente.first_name}} {{tratamento.paciente.last_name}}</a><br/>
+<b>Fisioterapeuta: </b><a href="{% url utilizadores %}{{tratamento.fisioterapeuta.id}}/">{{tratamento.fisioterapeuta.first_name}} {{tratamento.fisioterapeuta.last_name}}</a><br/>
 <b>Data de ínicio: </b> {{tratamento.data_inicio}}<br/>
 {% if not tratamento.data_fim %}
-<a href="/tratamentos/end/{{ tratamento.id }}/">Concluir tratamento</a>
+<a href="../end/{{ tratamento.id }}/">Concluir tratamento</a>
 {% else %}
 <b>Data de fim: </b> {{tratamento.data_fim}}<br/>
 {% endif %}
 
 <br/>
 Adicionar ficheiro:
-<form enctype="multipart/form-data" action="/tratamentos/{{tratamento.id}}/" method="post">{% csrf_token %}
+<form enctype="multipart/form-data" action="../{{tratamento.id}}/" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>
 {% for ficha in fichas %}
-<li> {{ ficha.data }} - {{ficha.nome}} (<a href="/{{ ficha.ficha }}">{{ ficha.ficha|filename }}</a>)</li>
+<li> {{ ficha.data }} - {{ficha.nome}} (<a href="{{ MEDIA_URL }}/{{ ficha.ficha }}">{{ ficha.ficha|filename }}</a>)</li>
 {% endfor %}
 {% endblock %}
