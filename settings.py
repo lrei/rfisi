@@ -1,27 +1,6 @@
-# Django settings for rfisi project.
+# settings.py
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-     ('Luis Rei', 'rifisi@mailinator.com'),
-)
-
-MANAGERS = ADMINS
-
-#admin password is 'password'
-DATABASES = {
-    'default': {
-        'ENGINE': 'mysql', #'postgresql_psycopg2', 'mysql', 'sqlite3'.
-        'NAME': 'rfisi',      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        #'USER': 'postgres',                      # Not used with sqlite3.
-        #'PASSWORD': 'password',                  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+import socket
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -46,20 +25,6 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'uh^415+*m%2w!z4$1yr@^3*k4)ww4@^+bz*!ubf=6b=jh&ig5r'
 
@@ -80,17 +45,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'rfisi.urls'
 
-TEMPLATE_DIRS = (
-'/Users/rei/FEUP/LSDO/rfisi/templates',
-)
-
 DATE_FORMAT = ('%d/%m/%Y',)
-
-
-STATIC_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/static'
-FICHAS_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/tratamentos/fichas'
-CV_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/candidaturas/cv'
-BI_DOC_ROOT = '/Users/rei/FEUP/LSDO/rfisi/files/candidaturas/bi'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -111,5 +66,11 @@ LOGIN_URL = '/utilizadores/login/'
 LOGOUT_URL = '/utilizadores/logout/'
 LOGIN_REDIRECT_URL = '/'
 
-MY_SITE_URL = 'rfisi.com'
+
 EMAIL_SUBJECT_PREFIX = '[rfisi] '
+
+
+if socket.gethostname() == 'style.local':
+    from settings_dev import *
+else:
+    from settings_prod import *

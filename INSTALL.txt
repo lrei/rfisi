@@ -1,0 +1,34 @@
+sudo useradd -d /home/martinhelder -m martinhelder
+sudo passwd martinhelder
+
+mysql -u root -p
+create database rfisi;
+use rfisi;
+grant all on rfisi.* to 'martinhelder'@'localhost' identified by '****';
+
+sudo apt-get install apache2 libapache2-mod-wsgi python-django python-mysqldb
+sudo easy_install geopy
+
+Configure apache ghost file in /etc/apache2/sites-enabled/
+
+<VirtualHost *:80>
+	ServerName wardrop.fe.up.pt
+	ServerAdmin mail@wardrop.fe.up.pt
+	DocumentRoot /home/martinhelder/rfisi
+
+	WSGIScriptAlias / /home/martinhelder/rfisi/django.wsgi
+	WSGIDaemonProcess rfisi user=martinhelder group=martinhelder processes=1 threads=10
+    	WSGIProcessGroup rfisi
+        <Directory /home/martinhelder/rfisi>
+                Order allow,deny
+                Allow from all
+        </Directory>
+
+	ErrorLog /home/martinhelder/logs/error.log
+	CustomLog /home/martinhelder/logs/access.log combined
+</VirtualHost>
+
+Configure settings_prod.py accordingly (self-explanatory options).
+
+cd /home/martinhelder/rfisi
+python manage.py syncdb

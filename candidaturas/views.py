@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from django.template import Template, RequestContext, loader, Context
 from candidaturas.models import Candidatura, CandidaturaForm
 from django.http import Http404
@@ -80,7 +81,7 @@ def rm(request, candidatura_id):
          
     c = Candidatura.objects.get(pk=candidatura_id)
     c.delete()
-    return HttpResponseRedirect('/candidaturas/')
+    return HttpResponseRedirect(reverse('candidaturas'))
 
 @login_required
 def approve(request, candidatura_id):
@@ -132,7 +133,7 @@ def approve(request, candidatura_id):
     c.aceite = True
     c.save()
     
-    return HttpResponseRedirect('/candidaturas/')
+    return HttpResponseRedirect(reverse('candidaturas'))
 
 @login_required
 def candidatura_list(request):

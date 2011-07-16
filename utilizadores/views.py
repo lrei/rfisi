@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.template import Template, RequestContext
 from django.http import Http404
 from utilizadores.models import *
@@ -67,7 +68,7 @@ def add(request):
                 #
 
                 # Redirect after POST
-                return HttpResponseRedirect('/utilizadores/')
+                return HttpResponseRedirect(reverse('utilizadores'))
             except:
                 user.delete()
                 return render_to_response('utilizadores/add_user.html',
@@ -163,7 +164,7 @@ def near(request, user_id):
         
     
     return render_to_response('utilizadores/distances.html',
-                                {'fisioterapeutas':fisioterapeutas,'user':u, 
+                                {'fisioterapeutas':fisioterapeutas[:20],'user':u, 
                                 'prof':user.get_profile()},
                                 context_instance=RequestContext(request))
     

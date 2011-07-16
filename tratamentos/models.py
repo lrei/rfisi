@@ -18,8 +18,11 @@ class Tratamento(models.Model):
 
 class FichaTratamento(models.Model):
     tratamento = models.ForeignKey(Tratamento)
+    nome = models.CharField(max_length=32)
     ficha = models.FileField(upload_to='tratamentos/fichas/%Y/%m/%d',
                             max_length=200)
+    data = models.DateTimeField(auto_now=True)
 
 class FichaForm(forms.Form):
+    nome = forms.CharField(max_length=32)
     ficha = forms.FileField()

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tratamentos_extra %}
 {% block title %}rFisi - Tratamento{% endblock %}
 {% block headertitle %}rFisi - Tratamento{% endblock %}
 {% block subtitle %}Tratamento{% endblock %}
@@ -14,11 +15,12 @@
 {% endif %}
 
 <br/>
+Adicionar ficheiro:
 <form enctype="multipart/form-data" action="/tratamentos/{{tratamento.id}}/" method="post">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>
 {% for ficha in fichas %}
-<li><a href="/{{ ficha.ficha }}">Ficha</a></li>
+<li> {{ ficha.data }} - {{ficha.nome}} (<a href="/{{ ficha.ficha }}">{{ ficha.ficha|filename }}</a>)</li>
 {% endfor %}
 {% endblock %}

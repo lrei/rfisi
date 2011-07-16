@@ -4,7 +4,12 @@
 {% block subtitle %}Lista de Tratamentos{% endblock %}
 {% block contentTitle %}Lista de Tratamentos{% endblock %}
 {% block content %}
-        {% for tratamento in tratamentos %}
-		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }} - {{ tratamento.paciente.first_name }} {{ tratamento.paciente.last_name }} - {{ tratamento.data_fim }}</a></li>
+        {% for tratamento in currentes %}
+		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }} - {{ tratamento.paciente.first_name }} {{ tratamento.paciente.last_name }}</a></li>
+        {% endfor %}
+		<br/>
+		Completos:
+		{% for tratamento in finalizados %}
+		<li><a href="/tratamentos/{{ tratamento.id }}/">{{ tratamento.data_inicio }} - {{ tratamento.paciente.first_name }} {{ tratamento.paciente.last_name }} - {{ tratamento.data_inicio }}</a></li>
         {% endfor %}
 {% endblock %}
